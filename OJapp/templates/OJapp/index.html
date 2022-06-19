@@ -1,1 +1,22 @@
-hello world ss
+
+{%load static%}
+<!DOCTYPE html>
+<head>
+    <title>
+        Questions
+    </title>
+    
+    </head>
+    <!-- <script src="{% static 'app.js'%}" defer></script> -->
+<body>
+    <div>
+        <ol>
+        {%for question in ques%}
+        <ol>
+        <a href= "{% url 'question' %}?{{question.id}}"> <h1><li>{{question.questionTitle}}</li> </h1></a>
+        </ol>
+        {%endfor%}
+    </ol>
+    </div>
+</body>
+</html>
