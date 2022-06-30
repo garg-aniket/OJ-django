@@ -92,7 +92,7 @@ def runCode(request):
     # print(inputCases)
     # print(expectedCases)  
     output,error=runcode1.run_py_code(typep,inputCases,code)
-    print(output)
+    print(output,error)
     # result=[]
     # if(not error):
     #     for x in range(0,len(expectedCases)):
@@ -111,5 +111,5 @@ def runCode(request):
     compileStatus="Successfull"
     if(error):
         compileStatus="Error"    
-    datareturn={'compileStatus':compileStatus}
+    datareturn={'compileStatus':compileStatus,'output':output}
     return JsonResponse(datareturn, content_type='application/json')

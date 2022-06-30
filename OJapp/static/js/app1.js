@@ -9,24 +9,26 @@ const cusInp=document.getElementById("custominput");
 const cusInpVal=document.getElementById("cus_inp_val");
 let data={};
 
-submit_btn.addEventListener("click", () => {
-    eAL.toggle("code");
-    eAL.toggle("code");
-    console.log(code.value);
-    let api=new XMLHttpRequest();
-    api.onload=function (){
-        console.log("ankiet");
-        console.log(JSON.parse(api.response));
-        data=JSON.parse(api.response);
-        console.log(data[0].fields,data[data.length-1].compileMessage);
-    };
-    api.open('post',"/submit",false);
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    api.setRequestHeader("X-CSRFToken", csrftoken);
-    api.send(JSON.stringify({'id': `${submit_btn.value}`,'type':`${type.value}`,'code':`${code.value}`}));
-});
+// submit_btn.addEventListener("click", () => {
+//     eAL.toggle("code");
+//     eAL.toggle("code");
+//     console.log(code.value);
+//     let api=new XMLHttpRequest();
+//     api.onload=function (){
+//         console.log("ankiet");
+//         console.log(JSON.parse(api.response));
+//         data=JSON.parse(api.response);
+//         console.log(data[0].fields,data[data.length-1].compileMessage);
+//     };
+//     api.open('post',"/submit",false);
+//     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+//     api.setRequestHeader("X-CSRFToken", csrftoken);
+//     api.send(JSON.stringify({'id': `${submit_btn.value}`,'type':`${type.value}`,'code':`${code.value}`}));
+// });
 
 runCode_btn.addEventListener("click", () => {
+    eAL.toggle("code");
+    eAL.toggle("code");
     let custInpt=cusInpVal.value
     let api=new XMLHttpRequest();
     api.onload=function (){
@@ -39,6 +41,7 @@ runCode_btn.addEventListener("click", () => {
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     api.setRequestHeader("X-CSRFToken", csrftoken);
     api.send(JSON.stringify({'id': `${runCode_btn.value}`,'type':`${type.value}`,'code':`${code.value}`,'custInpt':`${custInpt}`}));
+
 });
 
 cusInp.addEventListener('click',()=>{
@@ -85,6 +88,21 @@ function tescaseres(value) {
 }
 
 function showResult(){
+    eAL.toggle("code");
+    eAL.toggle("code");
+    console.log(code.value);
+    let api=new XMLHttpRequest();
+    api.onload=function (){
+        console.log("ankiet");
+        console.log(JSON.parse(api.response));
+        data=JSON.parse(api.response);
+        console.log(data[0].fields,data[data.length-1].compileMessage);
+    };
+    api.open('post',"/submit",false);
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    api.setRequestHeader("X-CSRFToken", csrftoken);
+    api.send(JSON.stringify({'id': `${submit_btn.value}`,'type':`${type.value}`,'code':`${code.value}`}));
+    
     res_div.innerHTML="";
     console.log(data.length)
     let testCases=data.length-1;

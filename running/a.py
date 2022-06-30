@@ -1,2 +1,2 @@
 for x in range(1,9):
-   print(x,end=" ")
+	print(x+1,end=" ");
