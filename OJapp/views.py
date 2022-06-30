@@ -50,7 +50,7 @@ def submitCode(request):
     inputCases=[]
     expectedCases=[]
     for x in testcases:
-        inputCases.append(x.Input)
+        inputCases.append(x.Input.strip())
         expectedCases.append(x.ExpectedOutput)
     print(inputCases)
     print(expectedCases)  
@@ -75,6 +75,7 @@ def submitCode(request):
     return HttpResponse(tes, content_type='application/json')
 def runCode(request):
     data=json.load(request)
+    print(data)
     typep=data.get('type')
     id=data.get('id')
     code=data.get('code')
@@ -108,8 +109,9 @@ def runCode(request):
     # ts=json.dumps(compmess)
     # tes=tes[:len(tes)-1]+","+ts+"]"
     # print(len(tes))
+    
     compileStatus="Successfull"
     if(error):
         compileStatus="Error"    
-    datareturn={'compileStatus':compileStatus,'output':output}
+    datareturn={'compileStatus':compileStatus,'output':output,'Error':error}
     return JsonResponse(datareturn, content_type='application/json')

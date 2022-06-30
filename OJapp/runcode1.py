@@ -29,6 +29,9 @@ def executeC(inp):
             os.close(temp)
 
             output = subprocess.check_output("gcc HelloWorld.c -o out1", shell = True,cwd="./running", stderr=subprocess.STDOUT)
+            if(output):
+                stderr=output.decode("utf-8")
+                break
             s = subprocess.check_output("out1", stdin = data, cwd="./running", shell = True, stderr=subprocess.PIPE)
             stdout.append(s.decode("utf-8"))
             stderr=None
@@ -52,10 +55,13 @@ def executeCpp(inp):
 
             os.write(temp, bytes(dat, "utf-8"))
             os.close(temp)
-
             output = subprocess.check_output("g++ HelloWorld.cpp -o out2", shell = True,cwd="./running", stderr=subprocess.STDOUT)
+            if(output):
+                stderr=output.decode("utf-8")
+                break
             p = subprocess.check_output('out2', stdin = data,cwd="./running",shell=True, stderr=subprocess.PIPE)
             stdout.append(p.decode("utf-8"))
+            
             # print(p.decode("utf-8"))
             stderr=None
         stdout=stdout    
@@ -78,6 +84,9 @@ def executeJava(inp):
             os.close(temp)
 
             output = subprocess.check_output("javac Hello.java", shell = True,cwd="./running", stderr=subprocess.STDOUT)
+            if(output):
+                stderr=output.decode("utf-8")
+                break
             p = subprocess.check_output("java Hello", stdin = data,shell = True,cwd="./running", stderr=subprocess.PIPE)
             # self.stdout = p.decode("utf-8")
             stdout.append(p.decode("utf-8"))

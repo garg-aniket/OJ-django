@@ -29,19 +29,86 @@ let data={};
 runCode_btn.addEventListener("click", () => {
     eAL.toggle("code");
     eAL.toggle("code");
-    let custInpt=cusInpVal.value
+    let runCodeData={};
+    let custInpt=cusInpVal.value;
+    console.log(custInpt);
     let api=new XMLHttpRequest();
     api.onload=function (){
         console.log("ankiet");
         console.log(JSON.parse(api.response));
-        data=JSON.parse(api.response);
+        runCodeData=JSON.parse(api.response);
         // console.log(data[0].fields,data[data.length-1].compileMessage);
     };
     api.open('post','/runCode',false);
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     api.setRequestHeader("X-CSRFToken", csrftoken);
     api.send(JSON.stringify({'id': `${runCode_btn.value}`,'type':`${type.value}`,'code':`${code.value}`,'custInpt':`${custInpt}`}));
+    if(runCodeData.compileStatus==="Error"){
+        res_div.innerHTML=`<span>Compilation Unsuccessfull</span>
+        <div class="gfg display">
+        <div style="width:100%;padding:1em;">
+        <div style="color:#576871; font-size: large;">
+        Compiler Message
+        <div class="box" id="com_mess">
+            <span style="margin-left:1em;color:red">${runCodeData.Error}</span>
+        </div>
+        </div>
+        </div>
+        </div>
+        `
+        return;
+    }
+    res_div.innerHTML="";
 
+    res_div.innerHTML+=`<div class="gfg display">
+    <div style="width:100%;padding:1em;">
+    <div style="color: #576871; font-size:large; margin-top:1em;">
+        Input (stdin)
+        <div class="box">
+            <ol style="margin: 0; padding-left:1.5em;" id="inp">
+
+                <li style="border-left: 1px solid #dfeaec; padding:2px;">
+                    <span style="color:black"></span>
+                    
+                </li>
+            </ol>
+            </div>
+    </div>
+
+    <div style="color: #576871; font-size: large;margin-top:1em;">
+        Expected Output
+        <div class="box">
+            <ol style="margin: 0; padding-left:1.5em;" id="out">
+                <li style="border-left: 1px solid #dfeaec; padding:2px;">
+                    <span style="color:black">aa</span>
+                    
+                </li>
+            </ol>
+            </div>
+    </div>
+    </div>
+</div>`
+
+const inp = document.getElementById("inp");
+const out = document.getElementById("out");
+inp.innerHTML="";
+out.innerHTML="";
+let inputData=custInpt.split('\n');
+let outputData=runCodeData.output[0].split('\r\n');
+let inpHtml="";
+let outHtml="";
+for(let i=0;i<inputData.length;i++){
+    inpHtml+=`<li style="border-left: 1px solid #dfeaec; padding:2px;">
+    <span style="color:black">${inputData[i]}</span>
+    </li>`
+}
+for(let i=0;i<outputData.length;i++){
+    outHtml+=`<li style="border-left: 1px solid #dfeaec; padding:2px;">
+    <span style="color:black">${outputData[i]}</span>
+    </li>`
+}
+inp.innerHTML=inpHtml;
+out.innerHTML=outHtml;
 });
 
 cusInp.addEventListener('click',()=>{
@@ -102,7 +169,7 @@ function showResult(){
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     api.setRequestHeader("X-CSRFToken", csrftoken);
     api.send(JSON.stringify({'id': `${submit_btn.value}`,'type':`${type.value}`,'code':`${code.value}`}));
-    
+
     res_div.innerHTML="";
     console.log(data.length)
     let testCases=data.length-1;

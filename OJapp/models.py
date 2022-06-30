@@ -9,8 +9,8 @@ class question(models.Model):
         return self.questionTitle
 class testCase(models.Model):
     questionTitle = models.ForeignKey(question, on_delete=models.CASCADE)
-    Input=RichTextField(blank=True,null=True) 
-    # Input=models.TextField(max_length = 200) 
+    # Input=RichTextField(blank=True,null=True) 
+    Input=models.TextField(max_length = 200,null=True) 
     ExpectedOutput=models.TextField(max_length = 200)
     def __str__(self):
         return str(self.questionTitle) 
