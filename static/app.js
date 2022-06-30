@@ -1,5 +1,5 @@
 const questid = document.getElementById("atag");
-alert("hi");
-questid.addEventListener("click", () => {
-  alert("hi");
-});
+const go = () => {
+  alert("go");
+}
+questid.addEventListener("click", go);

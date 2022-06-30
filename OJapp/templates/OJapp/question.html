@@ -1,1 +1,85 @@
-hi {{query.question}}
+{%load static%}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script language="javascript" type="text/javascript" src="{%static 'js/edit_area/edit_area_full.js'%}"></script>
+<script language="javascript" type="text/javascript">
+editAreaLoader.init({
+	id : "code"		// textarea id
+	,syntax: "css"			// syntax to be uses for highgliting
+	,start_highlight: true		// to display with highlight mode on start-up
+});
+</script>
+    <style>
+
+      h1 {
+          color:Green;
+      }
+      .gfg {
+          margin:auto;
+          margin-top: 2em;
+          background-color: white;
+          width: 50em;
+          height: 20em;
+          overflow-y: auto;
+
+      }
+      .display{
+          display:flex;
+      }
+      .box{                
+          background-color: #f3f7f7;
+          border-style: dotted;
+          border-width: 10em;
+          border: red;
+          width:100%;
+          font-style: bold;
+          padding: 0;
+      }
+      button{
+          cursor: pointer;
+      }
+      .list{
+          background-color: #f3f7f7;
+          content: counter(item);
+          counter-increment: item;
+          font-size: 12px;
+          border-right: 1px solid #e7eeef;
+          border-right-color: #e7eeef;
+      }
+  </style>
+    <meta charset="utf-8">
+    <title>Problem Description</title>
+      <script src="{% static 'js/app1.js'%}" defer></script>
+  </head>
+  <body style="background-color:#e7eeef">
+  <input type="hidden" name="id" value="{{query.id}}">
+  {% csrf_token %}
+<h1>{{query.id}}.{{query.question}}</h1>
+<div style="display:flex;justify-content:center">
+<div>
+<select name="type" id="type" style="display:block">
+  <option value="C++">C++</option>
+  <option value="Java">Java</option>
+  <option value="Python">Python</option>
+</select>
+<textarea name="code" id="code" style="display: block;width:50em;height:25em;margin-bottom:2px;" >
+write Your code here!.
+</textarea>
+<input type="checkbox" id="custominput" value="false" >custominput
+  <button id="runCode" value="{{query.id}}" style="margin-left:32.5em">Run Code</button>
+  <button id="submit_btn" value="{{query.id}}">Submit</button>
+  
+</break>
+
+<div id="res" style="display:none"><textarea name="custom_Input_Textbox" id="cus_inp_val" style="width:15em;height:9em">
+</textarea>
+</div>
+
+<div id="cont_result">
+</div>
+</div>
+</div>
+</body>
+</html>

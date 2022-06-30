@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <!-- <script src='app.js' defer></script> -->
+        <style>
+
+            h1 {
+                color:Green;
+            }
+            .gfg {
+                margin:auto;
+                margin-top: 2em;
+                background-color: white;
+                width: 50em;
+                height: 20em;
+                overflow-y: auto;
+
+            }
+            .display{
+                display:flex;
+            }
+            .box{                
+                background-color: #f3f7f7;
+                border-style: dotted;
+                border-width: 10em;
+                border: red;
+                width:100%;
+                font-style: bold;
+                padding: 0;
+            }
+            button{
+                cursor: pointer;
+            }
+            .list{
+                background-color: #f3f7f7;
+                content: counter(item);
+                counter-increment: item;
+                font-size: 12px;
+                border-right: 1px solid #e7eeef;
+                border-right-color: #e7eeef;
+            }
+        </style>
+    </head>
+    <body style="background-color:#f3f7f7;">
+    
+    <div class="gfg display">
+        <div>
+        <div style="width: 9em; padding: 0;margin: 0;">
+         {%for x in testCases%}   
+        <button id="1" style="height: 40px; width: 100%;background-color: white;border-width:0; color:rgb(202, 139, 29);" >
+            Test case 0
+        </button>
+        {%endfor%}        
+        </div>
+        <div style="width: 9em; padding: 0;margin: 0;">
+            <button id="1" style="height: 40px; width: 100%;background-color: white;border-width:0;" >
+                Test case 1
+            </button>        
+            </div>
+        </div>
+        <div style="width:100%;padding:1em;">
+            <div style="color:#576871; font-size: large;">
+                Compiler Message
+
+                <div class="box">
+                <ol style="margin: 0; padding-left:1.5em;">
+
+                    <li style="border-left: 1px solid #dfeaec; padding:2px;">
+                        <span style="color:black">aniket</span>
+                        
+                    </li>
+                    <li style="border-left: 1px solid #dfeaec;  padding:2px;">
+                        <span style="color:black">aniket</span>
+                    </li>
+                </ol>
+                </div>
+           
+            </div>
+        <div style="color: #576871; font-size:large; margin-top:1em;">
+            Input (stdin)
+            <div class="box">
+                <ol style="margin: 0; padding-left:1.5em;">
+
+                    <li style="border-left: 1px solid #dfeaec; padding:2px;">
+                        <span style="color:black">aniket</span>
+                        
+                    </li>
+                    <li style="border-left: 1px solid #dfeaec;  padding:2px;">
+                        <span style="color:black">aniket</span>
+                    </li>
+                </ol>
+                </div>
+        </div>
+
+        <div style="color: #576871; font-size: large;margin-top:1em;">
+            Expected Output
+            <div class="box">
+                <ol style="margin: 0; padding-left:1.5em;">
+                    <li style="border-left: 1px solid #dfeaec; padding:2px;">
+                        <span style="color:black">{{stdout[0]}}</span>
+                        
+                    </li>
+                    <li style="border-left: 1px solid #dfeaec;  padding:2px;">
+                        <span style="color:black">givenInput[0]</span>
+                    </li>
+                </ol>
+                </div>
+        </div>
+        </div>
+    </div>
+    </body>
+</html>

@@ -1,9 +1,16 @@
 from django.db import models
-
-
+from django.contrib.postgres.fields import ArrayField
+from ckeditor.fields import RichTextField
 class question(models.Model):
     questionTitle=models.CharField(max_length=100)
     question=models.CharField(max_length=255)
     
     def __str__(self):
         return self.questionTitle
+class testCase(models.Model):
+    questionTitle = models.ForeignKey(question, on_delete=models.CASCADE)
+    Input=RichTextField(blank=True,null=True) 
+    # Input=models.TextField(max_length = 200) 
+    ExpectedOutput=models.TextField(max_length = 200)
+    def __str__(self):
+        return str(self.questionTitle) 
