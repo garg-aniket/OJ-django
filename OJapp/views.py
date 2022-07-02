@@ -1,14 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 import json
 from django.core import serializers
 from django.http import HttpResponse,JsonResponse
 from .models import question,testCase
 from . import runcode1
+from django.contrib.auth import authenticate,login,logout
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     ques=question.objects.all()
     data={'ques':ques}
     return render(request,'OJapp/index.html',data)
 def test(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     qdict=request.GET
     fdict=qdict.dict()
     for key in fdict:
@@ -115,3 +120,16 @@ def runCode(request):
         compileStatus="Error"    
     datareturn={'compileStatus':compileStatus,'output':output,'Error':error}
     return JsonResponse(datareturn, content_type='application/json')
+
+def my_login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        if email !="" and password !="":
+            user=authenticate(username=email,password=password)
+            if user !=None:
+                login(request,user)
+                return redirect('index')  
+
+    return render(request,'OJapp/login.html')

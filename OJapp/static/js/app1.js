@@ -7,6 +7,8 @@ const res_div = document.getElementById("cont_result");
 const div=document.getElementById("res");
 const cusInp=document.getElementById("custominput");
 const cusInpVal=document.getElementById("cus_inp_val");
+const question=document.getElementById("question");
+const ques=document.getElementById("ques");
 let data={};
 
 // submit_btn.addEventListener("click", () => {
@@ -25,8 +27,8 @@ let data={};
 //     api.setRequestHeader("X-CSRFToken", csrftoken);
 //     api.send(JSON.stringify({'id': `${submit_btn.value}`,'type':`${type.value}`,'code':`${code.value}`}));
 // });
-
 runCode_btn.addEventListener("click", () => {
+    console.log("code is running");
     eAL.toggle("code");
     eAL.toggle("code");
     let runCodeData={};
@@ -155,6 +157,7 @@ function tescaseres(value) {
 }
 
 function showResult(){
+    console.log("code is running");
     eAL.toggle("code");
     eAL.toggle("code");
     console.log(code.value);
@@ -231,3 +234,4 @@ tescaseres(0);
 }
 
 submit_btn.addEventListener('click',showResult);
+ques.innerHTML=question.value;
